@@ -1,0 +1,47 @@
+during hs impl:
+    inline rust / macro calls :: rs { use std::rc::Rc; }
+    field update syntax
+    var.attr / mod.const ambiguity 
+    float ambiguity dot trails
+    top level const needs some 
+    type/trait inheriting
+    _ means private 
+
+after jr impl:
+    currying : ? or ?1 or _ in fn params
+    named params
+    imports / exports / use / pub
+    crate module as in lib.somefilename.jr is the lib.rs file
+    every main module member like main.main.jr is an executable
+
+
+
+
+
+
+
+
+
+
+
+inheritance: 
+
+// trait inheriting (multiple inheritance using :)
+trait RsType {
+    ..Any, ..ToStr
+    ..Debug, ..Copy
+    ..Clone
+    other_fun: () -> Self
+}
+
+// type inheriting (single inheritance using deref)
+type Asj {
+    ..AsjParent
+    otherattr: String
+}
+
+
+
+fn main() {
+    println!("haiii");
+}

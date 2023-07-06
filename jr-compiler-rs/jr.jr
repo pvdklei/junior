@@ -1,0 +1,84 @@
+use htm.{
+    reducer
+    button
+    text
+    icon
+}
+
+struct Props {
+    todos: [Todo]
+}    
+
+struct Todo {
+    title: string
+    done: bool
+}
+
+enum Action {
+    SetDodo(int)
+    DeleteTodo(int)
+    AddTodo(string)
+}
+
+let todo_list = fn (todos: [Todo], header: View)
+    let widget = reducer(TodoList, todos) 
+
+    widget.init fn widget 
+        State { todos }
+    end
+
+    let fine_button = button { on_click = fn 
+        widget.send(Action.DeleteTodo n)
+    end }
+
+    let view_todo = fn (title, done, n)
+        nice_button { on_click = fn 
+            widget.send(Action.SetDodo n)
+        end } fn
+            text title   
+            if done
+                text "vink" 
+            end
+        end
+
+        fine_button fn, text "remove" end
+    end
+
+    widget.view fn state
+        header()
+
+        let send = button "haii"
+        let tf = textfield { 
+            placeholder = "add todo"
+            starting_value = "fappen"
+        }
+        send.on_click fn
+            widget.send(Action.AddTodo(Todo { 
+                title = tf.value()
+                done = false
+            }))
+        end
+    end
+
+    widget.reduce fn (state, action)
+        match action as Action
+            SetTodo(n) then 
+                state.todos.(n).done.flip()
+                jr.print "yeahh"
+            end
+            DeleteTodo(n) then state.todos.remove n
+            AddTodo(title) then state.todos.push(Todo { title, done })
+        end 
+        widget.update()
+    end
+
+    widget.update()
+
+end
+
+
+
+
+
+
+

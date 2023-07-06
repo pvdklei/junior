@@ -1,0 +1,4 @@
+
+// binary functions
+fn lhs .append element
+    lhs.data.push element

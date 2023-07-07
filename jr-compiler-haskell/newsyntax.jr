@@ -1,0 +1,83 @@
+
+use jr.{ 
+    time, random, sheets, ui
+    gui, file, http, math 
+}
+
+// constants
+name: "" = "good day"
+id: Int = 22
+
+// functions
+day_color: Color -> Day
+day_color = color -> match color {
+    Red -> Monday, 
+    Orange -> Tuesday,
+    Yellow -> Wednesday, 
+    Green -> Thursday,
+    Blue -> Friday, 
+    Grey -> 
+        if time.is_it_sunday?() 
+        -> Sunday 
+        else Saturday
+    }
+}
+
+struct_fn: { name: String, best_day: Day = Weekend } -> String
+struct_fn = { name, best_day } -> "$name: best day is $best_day"
+
+// types
+type SomeRecord {
+    ..anothermod.ParentType
+    some_string: ""
+    color: Color
+}
+type SomeTuple(Int, "")
+type SomeEnum {
+    WithALabel
+    WithALabeledTuple(Int, [Int])
+    WithARecord { some_vector: immut.[Color] }
+}
+
+// methods 
+impl SomeRecord {
+    new = () -> Self { .., color = Blue, .. } 
+}
+
+// anonymous structs, maps, anymaps
+incog: .{ num: Float } = .{ num = 34.0 }
+image: /{ "" -> Name } = /{ "hai" -> Name.new("adolf") }
+any??: %{ "" }         = %{ "string" -> } 
+
+// traits
+trait CanPlayTheFlute {
+    play_flute: &Self -> ()
+    learn_flute: Self -> Self
+}
+
+impl SomeRecord as CanPlayTheFlute {
+    play_flute: &Self -> () 
+    play_fulte = self -> {
+        last = self.some_string + " ", self.color
+        jr.println("feuuw fewt $last")
+    }
+}
+
+impl SomeRecord as Default {
+    default = () -> Self { .., color = Yellow, some_string = "yooo" }
+}
+
+// simple string, strslice, slice, vector, and box type notation
+vec: [Int] = [22, 87]
+slice: &[Char] = ['r', 's', ' ', 's', 'l', 'i', 'c', 'e']
+string: "" = "with string $interpolation"
+strslice: &"" = &"the same as_ rust strref"
+on_the_heap: *MyType = *MyTypeOption1
+
+//
+
+
+
+
+
+

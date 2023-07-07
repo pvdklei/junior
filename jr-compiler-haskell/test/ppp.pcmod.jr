@@ -1,0 +1,7 @@
+
+type Name {
+    hai: String
+    name: Int
+}
+
+hai: "" = "hai $name"

@@ -1,0 +1,52 @@
+
+
+struct Struct { attr: String }
+enum Enum { Label, Tuple(String) }
+union Union { String, Int, Float }
+trait Trait { method: () -> String }
+type Alias String
+
+// ui
+
+use jr.ui.{ Widget, text, container, icon, image, spacer, Sizing }
+
+fn counter: () -> &impl Widget -> () = fn fn widget -> {
+
+    widget.istate fn { count = 0 } 
+
+    widget.on_msg fn match _ {
+        Increase(n) => {
+            widget.state().count += n
+            widget.update(CountText)
+        }
+    }
+
+    widget.on_update fn { widget.draw() }
+
+    widget.view fn {
+        let { count } = widget.state()
+        
+        [container [
+            text "Click the button to increase the counter"
+                .color Black
+            icon "plus_icon.png"
+                .on_click fn _ -> widget.send Increase 5
+                .on_hover fn _.animate
+                    .fast_in { for = time.ms 550.0, .. }
+                    .fast_out { for = time.sec 0.3, .. }
+        ]   
+            .vstack()
+            .padding(Sizing.PercentOfParent 10)
+            .width(Sizing.PercentOfParent 30)
+            .center()
+        spacer()
+        image "dog.png"
+        spacer()
+        text { content = count.into(), size = Sizing.PercentOfParent 20, .. }
+            .label(widget, CountText)
+    ]}  
+    
+    widget
+        .hstack()
+        .background_color Yellow
+}
